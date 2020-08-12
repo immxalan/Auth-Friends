@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { axiosAuth } from "../utils/axiosAuth";
+import { AxiosWithAuth } from "../utils/AxiosWithAuth";
 
 const Login = props => {
   const [user, setUser] = useState("");
@@ -17,17 +17,18 @@ const Login = props => {
     e.preventDefault();
     console.log(user);
     console.log(pass);
+    console.log(window.localStorage.getItem('token'))
 
     const credentials = {
       username: user,
       password: pass
     };
-    axiosAuth()
+    AxiosWithAuth()
       .post("/api/login", credentials)
       .then(res => {
         console.log(res.data.payload);
         localStorage.setItem("token", res.data.payload);
-        props.history.push("/api/friends");
+        props.history.push("/friendslist");
       })
       .catch(err => {
         console.log("Error posting", err);

@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from "react";
-import { axiosAuth } from "../utils/axiosAuth";
+import React, {useState} from "react";
+import { AxiosWithAuth } from "../utils/AxiosWithAuth";
 
-const Friends = (props) => {
+const AddFriendsForm = (props) => {
     const [friend, setFriend] = useState({
         id: Date.now(),
         name: "",
@@ -14,12 +14,12 @@ const Friends = (props) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        axiosAuth()
+        AxiosWithAuth()
             .post("/api/friends", friend)
             .then(res => console.log(res.data))
             .catch(err => console.log("post error", err));
         setTimeout(() => {
-            props.history.push("/friends")
+            props.history.push("/friendslist")
         }, 2000)
     }
 
@@ -56,4 +56,4 @@ const Friends = (props) => {
     )
 
 }
-export default Friends
+export default AddFriendsForm

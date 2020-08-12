@@ -3,31 +3,27 @@ import './App.css';
 import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
 import Login from "./components/Login";
 import PrivateRoute from "./components/PrivateRoute";
-import Friends from "./components/FriendsForm";
+import AddFriendForm from "./components/AddFriendForm";
 import FriendsList from "./components/FriendsList";
-
+import Logout from './components/Logout';
 function App() {
   return (
-    <Router>
     <div className="App">
-    <ul>
-      <li>
+      <header className="App-header">
+      <Router>
         <Link to= "/login">Login</Link>
-      </li>
-      <li>
-        <Link to="/friends">Friends</Link>
-      </li>
-      <li>
+        <Link to= "/logoff">Logout</Link>
+        <Link to="/friendsform">Add a Friend</Link>
         <Link to="/friendslist">Friends List</Link>
-      </li>
-    </ul>
     <Switch>
-      <PrivateRoute exact path="/friends" component={Friends}/>
-      <PrivateRoute exact path="/friendslist" component={FriendsList}/>
       <Route  path="/login" component={Login}/>
+      <PrivateRoute exact path="/logoff" component={Logout}/>
+      <PrivateRoute exact path="/friendsform" component={AddFriendForm}/>
+      <PrivateRoute exact path="/friendslist" component={FriendsList}/>
     </Switch>
-    </div>
     </Router>
+      </header>
+    </div>
   );
 }
 
